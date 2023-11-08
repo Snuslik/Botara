@@ -46,14 +46,14 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
             text: "я работаю корректно",
             cancellationToken: cancellationToken);
         }
-        if (messageText == "привет" || messageText == "Привет")
+        else if (messageText == "привет" || messageText == "Привет")
         {
             await botClient.SendTextMessageAsync(
             chatId: chatId,
             text: "Здраствуйте! что вам показать?",
             cancellationToken: cancellationToken);
         }
-        if (messageText == "картинка" || messageText == "Картинка")
+        else if (messageText == "картинка" || messageText == "Картинка")
         {
             message = await botClient.SendPhotoAsync(
         chatId: chatId,
@@ -61,7 +61,7 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
         parseMode: ParseMode.Html,
         cancellationToken: cancellationToken);
         }
-        if (messageText == "видео" || messageText == "Видео")
+        else if (messageText == "видео" || messageText == "Видео")
         {
             message = await botClient.SendVideoAsync(
          chatId: chatId,
@@ -70,12 +70,19 @@ async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, Cancel
          supportsStreaming: true,
          cancellationToken: cancellationToken);
         }
-        if (messageText == "стикер" || messageText == "Стикер")
+        else if (messageText == "стикер" || messageText == "Стикер")
         {
             Message message1 = await botClient.SendStickerAsync(chatId: chatId,
             sticker: InputFile.FromUri("https://raw.githubusercontent.com/Snuslik/HorikovRPG/main/5318815790592440875.webp"), cancellationToken: cancellationToken);
         }
-        
+            else
+{
+    await botClient.SendTextMessageAsync(
+        chatId: chatId,
+        text: "Неверное сообщение.\r\nВведите одно из представленных\r\n1.Картинка\r\n2.Видео\r\n3.Стикер",
+        cancellationToken: cancellationToken);
+
+}
 }
 
 
